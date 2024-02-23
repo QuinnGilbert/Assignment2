@@ -22,6 +22,7 @@ int main() {
 
             mtx.lock();
             queue.push_back(guest); // guest initially enters
+            this_thread::sleep_for(chrono::seconds(1)); // wait for push to succeed
             mtx.unlock();
 
             while(true) {
@@ -30,6 +31,7 @@ int main() {
                     // guest at the front of the line enters
                     mtx.lock();
 
+                    cout<<"Queue: ";
                     for(int i:queue) cout<<i<<" ";
                     cout<<endl;
 
@@ -51,14 +53,3 @@ int main() {
     }
 
 }
-
-/*
-
-insert all into queue (concurrently with race condition)
-
-
-
-
-
-
-*/
